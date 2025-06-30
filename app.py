@@ -48,9 +48,7 @@ if st.button("Build My Startup") and startup_idea.strip():
             if role not in agent_outputs:
                 agent_outputs[role] = msg['content']
             else:
-                agent_outputs[role] += "
-
-" + msg['content']
+                agent_outputs[role] += "\n" + msg['content']
 
     st.success("🎉 Your AI startup is ready!")
 
@@ -60,8 +58,7 @@ if st.button("Build My Startup") and startup_idea.strip():
         if "|---" in content and "|" in content:
             try:
                 table_lines = [line.strip() for line in content.splitlines() if "|" in line]
-                table_text = "
-".join(table_lines)
+                table_text = "\n".join(table_lines)
                 from io import StringIO
                 df = pd.read_csv(StringIO(table_text), sep="|", engine="python")
                 df.columns = [col.strip() for col in df.columns]
